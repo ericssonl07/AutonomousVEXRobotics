@@ -1,0 +1,21 @@
+{
+	"extension": {
+		"version": "0.6.1",
+		"json": 2
+	},
+	"project": {
+		"name": "VEXRobotics",
+		"description": "General Autonomous/Control Library for VEX Robotics",
+		"creationDate": "11/19/2024, 8:03:16 PM",
+		"platform": "V5",
+		"language": "cpp",
+		"slot": 1,
+		"sdkVersion": "V5_20240802_15_00_00",
+		"cpp": {
+			"includePath": [
+				"${vex_sdkIncludes}"
+			],
+			"printf_float": true
+		}
+	}
+}

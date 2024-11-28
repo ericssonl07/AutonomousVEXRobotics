@@ -1,0 +1,13 @@
+{
+	"C_Cpp.default.systemIncludePath": [
+		"${config:vexrobotics.vexcode.Cpp.Sdk.Home}/V5/V5_20240802_15_00_00/vexv5/gcc/include/sys"
+	],
+	"files.associations": {
+		"map": "cpp",
+		"vector": "cpp",
+		"type_traits": "cpp",
+		"chrono": "cpp"
+	},
+	"C_Cpp.default.cppStandard": "gnu++20",
+	"C_Cpp.default.compilerPath": "/usr/bin/g++"
+}

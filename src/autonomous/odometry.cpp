@@ -8,10 +8,12 @@
 int track(void* o) {
     Odometry* odometry = (Odometry*) o;
     odometry -> left_right_encoder -> resetRotation();
+    odometry -> front_back_encoder -> resetRotation();
+    odometry -> inertial_sensor -> resetRotation();
     double last_left_position = 0.0;
     double last_drift = 0.0;
     while (true) {
-        double left = odometry -> front_back_encoder -> position(vex::rotationUnits::deg) * M_PI / 180.0 * odometry -> wheel_radius * odometry -> gear_multiplier;
+        double left = odometry -> front_back_encoder -> position(vex::rotationUnits::deg) * M_PI / 180.0 * odometry -> wheel_radius;
         double delta_left = left - last_left_position;
         double rotation = odometry -> inertial_sensor -> rotation(vex::rotationUnits::deg) * M_PI / 180.0;
         double delta_rotation = rotation - odometry -> rotation_value;
@@ -43,8 +45,8 @@ int track(void* o) {
     }
 }
 
-Odometry::Odometry(vex::encoder * front_back_encoder, vex::encoder * left_right_encoder, vex::inertial * inertial_sensor, double base_width, double wheel_radius, double gear_multiplier, int thread_sleep):
-    front_back_encoder(front_back_encoder), left_right_encoder(left_right_encoder), inertial_sensor(inertial_sensor), base_width(base_width), wheel_radius(wheel_radius), gear_multiplier(gear_multiplier), thread_sleep(thread_sleep) {
+Odometry::Odometry(vex::encoder * front_back_encoder, vex::encoder * left_right_encoder, vex::inertial * inertial_sensor, double base_width, double wheel_radius, int thread_sleep):
+    front_back_encoder(front_back_encoder), left_right_encoder(left_right_encoder), inertial_sensor(inertial_sensor), base_width(base_width), wheel_radius(wheel_radius), thread_sleep(thread_sleep) {
     x_position = 0.0;
     y_position = 0.0;
     rotation_value = 0.0;

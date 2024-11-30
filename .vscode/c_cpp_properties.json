@@ -11,7 +11,7 @@
 			"${vex_sdkPath}/include/**",
 			"${workspaceFolder}/include/**",
 			"${workspaceFolder}/src/**",
-            "/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/**"
+			"/Library/Developer/CommandLineTools/SDKs/MacOSX14.2.sdk/usr/include/**"
 		]
 	},
 	"configurations": [

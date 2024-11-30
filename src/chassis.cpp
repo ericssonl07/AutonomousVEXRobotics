@@ -11,10 +11,10 @@
 Chassis::Chassis(MotorGroup * left, MotorGroup * right,
                  vex::encoder * front_back_encoder, vex::encoder * left_right_encoder, vex::inertial * inertial_sensor,
                  double base_width, double wheel_radius,
-                 double pursuit_distance, double gear_multiplier,
+                 double pursuit_distance,
                  double initial_x, double initial_y, double initial_rotation,
                  int thread_sleep):
-                 odometry(front_back_encoder, left_right_encoder, inertial_sensor, base_width, wheel_radius, gear_multiplier, thread_sleep),
+                 odometry(front_back_encoder, left_right_encoder, inertial_sensor, base_width, wheel_radius, thread_sleep),
                  base_width(base_width), pursuit_distance(pursuit_distance), 
                  thread_sleep(thread_sleep),
                  left(left), right(right),

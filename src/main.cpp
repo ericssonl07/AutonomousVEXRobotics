@@ -30,7 +30,7 @@ Chassis base (
     &left_group, &right_group, /* Motor groups */ 
     &front_back_encoder, &left_right_encoder, &inertial_sensor, /* Sensors */
     31.4 /* Base width */,              4.25 /* Wheel radius */,
-    12.5 /* Pursuit distance */,        0.052085391069929 /* Gear multiplier */, /*113/99*0.04563233376923-*/
+    12.5 /* Pursuit distance */,
     0.0, 0.0, 0.0 /* Initial pose */,   1 /* Thread sleep: 1 milliseconds */
 );
 

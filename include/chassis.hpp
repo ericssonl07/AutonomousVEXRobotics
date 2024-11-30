@@ -66,13 +66,12 @@ public:
      * @param base_width The width of the base.
      * @param wheel_radius The radius of the wheel.
      * @param pursuit_distance The pursuit distance for the pure pursuit algorithm.
-     * @param gear_multiplier A constant scaling factor to account for gear ratio effects.
      * @param initial_x The initial x position of the robot.
      * @param initial_y The initial y position of the robot.
      * @param initial_rotation The initial rotation of the robot.
      * @param thread_sleep The time in milliseconds to sleep between iterations.
      */
-    Chassis(MotorGroup * left, MotorGroup * right, vex::encoder * front_back_encoder, vex::encoder * left_right_encoder, vex::inertial * inertial_sensor, double base_width, double wheel_radius, double pursuit_distance, double gear_multiplier, double initial_x, double initial_y, double initial_rotation, int thread_sleep);
+    Chassis(MotorGroup * left, MotorGroup * right, vex::encoder * front_back_encoder, vex::encoder * left_right_encoder, vex::inertial * inertial_sensor, double base_width, double wheel_radius, double pursuit_distance, double initial_x, double initial_y, double initial_rotation, int thread_sleep);
     
     /**
      * @brief Follow a path defined by a set of points.

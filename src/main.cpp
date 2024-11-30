@@ -19,74 +19,27 @@
 
 #include <vex.h>
 #include <chassis.hpp>
+#include <config.hpp>
 
-vex::brain brain;
-vex::motor rm1(vex::PORT13, vex::ratio6_1, false), rm2(vex::PORT12, vex::ratio6_1, false), rm3(vex::PORT11, vex::ratio6_1, false);
-vex::motor lm1(vex::PORT3, vex::ratio6_1, true), lm2(vex::PORT2, vex::ratio6_1, true), lm3(vex::PORT1, vex::ratio6_1, true);
-MotorGroup right_group(&rm1, &rm2, &rm3), left_group(&lm1, &lm2, &lm3);
-vex::encoder front_back_encoder(brain.ThreeWirePort.A), left_right_encoder(brain.ThreeWirePort.B); // PORTS!!
-vex::inertial inertial_sensor(vex::PORT8); // PORTS!!)
-Chassis base (
-    &left_group, &right_group, /* Motor groups */ 
-    &front_back_encoder, &left_right_encoder, &inertial_sensor, /* Sensors */
-    31.4 /* Base width */,              4.25 /* Wheel radius */,
-    12.5 /* Pursuit distance */,
-    0.0, 0.0, 0.0 /* Initial pose */,   1 /* Thread sleep: 1 milliseconds */
-);
+void autonomous_tasks(Chassis & chassis, Side autonomous_configuration) {
+    chassis.forward(100, 0, 0);
+}
 
-#ifdef EXPERIMENTAL
-    #if __cplusplus > 201703L
-        #include <experimental/protocols.hpp>
-        #include <concepts>
+void control_tasks(Chassis & chassis) {
+    vex::controller controller;
+    vex::thread t(Chassis::basic_control, &chassis);
+    while (true) {
 
-        template<AutonomousCompatible ChassisInstance>
-        void autonomous(ChassisInstance & chassis) {
-            chassis.forward(100, 0, 0);
-        }
-
-        template<ControllerCompatible ChassisInstance>
-        void control(ChassisInstance & chassis) {
-            vex::controller controller;
-            void * void_ptr;
-            vex::thread t(chassis.basic_control);
-            while (true) {
-
-            }
-        }
-        #else // EXPERIMENTAL
-        void autonomous_tasks(Chassis & chassis) {
-            chassis.forward(100, 0, 0);
-        }
-
-        void control_tasks(Chassis & chassis) {
-            vex::controller controller;
-            vex::thread t(Chassis::basic_control, &chassis);
-            while (true) {
-
-            }
-        }
-    #endif // __cplusplus > 201703L
-#else
-    void autonomous_tasks(Chassis & chassis) {
-        chassis.forward(100, 0, 0);
     }
-
-    void control_tasks(Chassis & chassis) {
-        vex::controller controller;
-        vex::thread t(Chassis::basic_control, &chassis);
-        while (true) {
-
-        }
-    }
-#endif // EXPERIMENTAL
+}
 
 void autonomous() {
-    // selector code here
-    autonomous_tasks(base);
+    int selector_delay_msec = 5000;
+    selector(selector_delay_msec);
+    autonomous_tasks(base, autonomous_configuration);
 }
 
 void control() {
-    // selector code here
     control_tasks(base);
 }
 

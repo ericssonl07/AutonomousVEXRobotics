@@ -7,8 +7,8 @@
 
 int track(void* o) {
     Odometry* odometry = (Odometry*) o;
-    odometry -> left_right_encoder -> resetRotation();
-    odometry -> front_back_encoder -> resetRotation();
+    odometry -> left_right_encoder -> resetPosition();
+    odometry -> front_back_encoder -> resetPosition();
     odometry -> inertial_sensor -> resetRotation();
     double last_left_position = 0.0;
     double last_drift = 0.0;
@@ -45,7 +45,7 @@ int track(void* o) {
     }
 }
 
-Odometry::Odometry(vex::encoder * front_back_encoder, vex::encoder * left_right_encoder, vex::inertial * inertial_sensor, double base_width, double wheel_radius, int thread_sleep):
+Odometry::Odometry(vex::rotation * front_back_encoder, vex::rotation * left_right_encoder, vex::inertial * inertial_sensor, double base_width, double wheel_radius, int thread_sleep):
     front_back_encoder(front_back_encoder), left_right_encoder(left_right_encoder), inertial_sensor(inertial_sensor), base_width(base_width), wheel_radius(wheel_radius), thread_sleep(thread_sleep) {
     x_position = 0.0;
     y_position = 0.0;
@@ -62,7 +62,7 @@ double Odometry::y() {
 }
 
 double Odometry::rotation() {
-    return Odometry::rotation_value;
+    return inertial_sensor -> rotation(vex::rotationUnits::deg) * M_PI / 180.0;
 }
 
 void Odometry::set_pose(double x, double y, double rotation) {

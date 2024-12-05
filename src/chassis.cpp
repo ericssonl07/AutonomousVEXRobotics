@@ -9,7 +9,7 @@
 #include <cmath>
 
 Chassis::Chassis(MotorGroup * left, MotorGroup * right,
-                 vex::encoder * front_back_encoder, vex::encoder * left_right_encoder, vex::inertial * inertial_sensor,
+                 vex::rotation * front_back_encoder, vex::rotation * left_right_encoder, vex::inertial * inertial_sensor,
                  double base_width, double wheel_radius,
                  double pursuit_distance,
                  double initial_x, double initial_y, double initial_rotation,
@@ -134,9 +134,12 @@ void Chassis::basic_control(void * instance) {
 }
 
 void coordinate_display(void * b) {
+    vex::brain brain;
     Chassis * base = (Chassis *) b;
     while (true) {
-        printf("(%.5f, %.5f, %.5f),\n", base -> x(), base -> y(), base -> rotation());
+        brain.Screen.setCursor(1, 1);
+        printf("(%.5f, %.5f, %.5f), %.5f\n", base -> x(), base -> y(), base -> rotation(), base -> inertial_sensor -> rotation(vex::rotationUnits::deg));
+        brain.Screen.print("(%.5f, %.5f, %.5f)", base -> x(), base -> y(), base -> rotation());
         // printf("(%.5f, %.5f)\n", base -> odometry.x(), base -> odometry.y());
         vex::this_thread::sleep_for(50);
     }

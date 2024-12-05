@@ -27,14 +27,14 @@ class Odometry {
      * 
      * Parallel to the robot's velocity.
      */
-    vex::encoder * front_back_encoder;
+    vex::rotation * front_back_encoder;
 
     /**
      * @brief The left-right encoder.
      * 
      * Perpendicular to the robot's velocity.
      */
-    vex::encoder * left_right_encoder;
+    vex::rotation * left_right_encoder;
 
     /**
      * @brief The inertial sensor.
@@ -83,7 +83,7 @@ public:
      * @param wheel_radius The radius of the wheel.
      * @param thread_sleep The time in milliseconds to sleep between iterations.
      */
-    Odometry(vex::encoder * front_back_encoder, vex::encoder * left_right_encoder, vex::inertial * inertial_sensor, double base_width, double wheel_radius, int thread_sleep);
+    Odometry(vex::rotation * front_back_encoder, vex::rotation * left_right_encoder, vex::inertial * inertial_sensor, double base_width, double wheel_radius, int thread_sleep);
     
     /**
      * @brief Retrieve the x coordinate.

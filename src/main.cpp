@@ -24,8 +24,8 @@ vex::brain brain;
 vex::motor rm1(vex::PORT13, vex::ratio6_1, false), rm2(vex::PORT12, vex::ratio6_1, false), rm3(vex::PORT11, vex::ratio6_1, false);
 vex::motor lm1(vex::PORT3, vex::ratio6_1, true), lm2(vex::PORT2, vex::ratio6_1, true), lm3(vex::PORT1, vex::ratio6_1, true);
 MotorGroup right_group(&rm1, &rm2, &rm3), left_group(&lm1, &lm2, &lm3);
-vex::encoder front_back_encoder(brain.ThreeWirePort.A), left_right_encoder(brain.ThreeWirePort.B); // PORTS!!
-vex::inertial inertial_sensor(vex::PORT8); // PORTS!!)
+vex::inertial inertial_sensor(vex::PORT20, vex::turnType::left);
+vex::rotation front_back_encoder(vex::PORT19, true), left_right_encoder(vex::PORT18, false);
 Chassis base (
     &left_group, &right_group, /* Motor groups */ 
     &front_back_encoder, &left_right_encoder, &inertial_sensor, /* Sensors */
@@ -92,14 +92,17 @@ void control() {
 
 int main() {
     vexDelay(1); // DO NOT REMOVE!!
+    vexDelay(2000); 
+    left_right_encoder.resetPosition(); front_back_encoder.resetPosition(); inertial_sensor.resetRotation();
+    vex::thread t(coordinate_display, &base);
 
     #ifdef COMPETITION
     vex::competition competition;
     competition.autonomous(autonomous);
     competition.drivercontrol(control);
     #else // COMPETITION
-    autonomous();
-    control();
+    // autonomous();
+    // control();
     #endif // COMPETITION
     
     while (true) { vex::this_thread::sleep_for(100); } // DO NOT REMOVE!!

@@ -16,8 +16,8 @@ vex::brain brain;
 vex::motor rm1(vex::PORT13, vex::ratio6_1, false), rm2(vex::PORT12, vex::ratio6_1, false), rm3(vex::PORT11, vex::ratio6_1, false);
 vex::motor lm1(vex::PORT3, vex::ratio6_1, true), lm2(vex::PORT2, vex::ratio6_1, true), lm3(vex::PORT1, vex::ratio6_1, true);
 MotorGroup right_group(&rm1, &rm2, &rm3), left_group(&lm1, &lm2, &lm3);
-vex::encoder front_back_encoder(brain.ThreeWirePort.A), left_right_encoder(brain.ThreeWirePort.B);
-vex::inertial inertial_sensor(vex::PORT8);
+vex::inertial inertial_sensor(vex::PORT20, vex::turnType::left);
+vex::rotation front_back_encoder(vex::PORT19, true), left_right_encoder(vex::PORT18, false);
 Chassis base (
     &left_group, &right_group, /* Motor groups */ 
     &front_back_encoder, &left_right_encoder, &inertial_sensor, /* Sensors */

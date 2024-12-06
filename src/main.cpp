@@ -45,14 +45,17 @@ void control() {
 
 int main() {
     vexDelay(1); // DO NOT REMOVE!!
+    vexDelay(2000); 
+    left_right_encoder.resetPosition(); front_back_encoder.resetPosition(); inertial_sensor.resetRotation();
+    vex::thread t(coordinate_display, &base);
 
     #ifdef COMPETITION
     vex::competition competition;
     competition.autonomous(autonomous);
     competition.drivercontrol(control);
     #else // COMPETITION
-    autonomous();
-    control();
+    // autonomous();
+    // control();
     #endif // COMPETITION
     
     while (true) { vex::this_thread::sleep_for(100); } // DO NOT REMOVE!!

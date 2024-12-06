@@ -120,3 +120,5 @@ std::pair<double, double> Pursuit::get_relative_steering(double from_x, double f
     }
     return std::make_pair(left_steering * scale, right_steering * scale);
 }
+
+// Unit testing result: https://www.desmos.com/calculator/0wlkkn4vn2

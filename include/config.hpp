@@ -2,7 +2,7 @@
 #define VEXROBOTICS_CONFIG_HPP
 
 #include <vex.h>
-#include <motor.hpp>
+#include <autonomous/motor.hpp>
 #include <chassis.hpp>
 
 enum Side {
